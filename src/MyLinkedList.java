@@ -1,6 +1,7 @@
-public class LinkedList {
+public class MyLinkedList<N> {
 	public static void main ( String [] args) {
-		LinkedList list = new LinkedList();
+/*
+		MyLinkedList<N> list = new MyLinkedList<N>();
 		list.insert(10);
 		list.insert(15);
 		list.insert(5);
@@ -14,6 +15,7 @@ public class LinkedList {
 		Link revList = list.reverseList(list.head);
 		System.out.println("================================");
 		list.print(revList);
+*/
 
 
 		
