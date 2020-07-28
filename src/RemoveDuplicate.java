@@ -1,3 +1,7 @@
+/*
+* remove duplicates from a sorted array.
+* Alternatively, given an unsorted array, first sort and use the same algo
+*/
 import java.util.Arrays;
 
 public class RemoveDuplicate {
