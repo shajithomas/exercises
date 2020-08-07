@@ -1,7 +1,4 @@
 import static org.junit.Assert.*;
-
-import java.io.IOException;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,8 +11,8 @@ public class ArrayTestTest {
 	
 	@Test
 	public void testReverseArray() {
-		Integer[] array = {1,2,3,4,5,6,7};
-		Integer []expected = {7,6,5,4,3,2,1};
+		Integer[] array = {1,2,3,4,5,6};
+		Integer []expected = {6,5,4,3,2,1};
 		Integer []result = test.reverseArray(array);
 		assertArrayEquals("something wrong with AssertArrayEquals",expected, result);
 	}

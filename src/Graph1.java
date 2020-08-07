@@ -1,5 +1,5 @@
 /*
- * simple graph traversal
+ * simple graph traversal DFS
  * using pre-sized array to store the vertices.
  * uses a boolean array to store visited flag
  */
@@ -26,9 +26,7 @@ class Graph1 {
         for (int i = 0; i < graphArray.size(); i++) {
             LinkedList<Integer> vertex = graphArray.get(i);
             System.out.print("\nvertex " + i);
-            vertex.forEach(v -> {
-                System.out.print(" -> " + v);
-            });
+            vertex.forEach(v -> System.out.print(" -> " + v));
         }
     }
 

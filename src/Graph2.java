@@ -1,5 +1,5 @@
 /*
- * graph traversal using HashMap to store the Graph as adjacency list
+ * DFS graph traversal using HashMap to store the Graph as adjacency list
  * A map of linkedLists 
  * uses a boolean HashMap to store visited flag
  */
@@ -34,9 +34,7 @@ class Graph2 {
         for (int i = 0; i < graph.size(); i++) {
             LinkedList<Integer> vertex = graph.get(i);
             System.out.print("\nvertex " + i);
-            vertex.forEach(v -> {
-                System.out.print(" -> " + v);
-            });
+            vertex.forEach(v -> System.out.print(" -> " + v));
         }
     }
 
