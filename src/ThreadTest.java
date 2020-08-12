@@ -8,12 +8,12 @@ import java.util.*;
  * If you need more classes, simply define them inline.
  */
 
-class Solution {
+class ThreadTest {
   static volatile boolean quit = false;
   public static void main(String[] args) throws Exception{
     Thread t = new Thread (() -> {
       int i = 0;
-      while (i < 1000 && quit != true) {
+      while (i < 1000 && !quit) {
         System.out.println("running thread..... " + i + "  quit=" + quit);
         i++;
       }

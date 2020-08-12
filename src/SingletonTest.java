@@ -10,4 +10,17 @@ public class SingletonTest {
 		assertEquals(s1, s2);
 	}
 
+	@Test
+	public void testSingleton() {
+		Singleton instance = Singleton.getInstance();
+		instance.test();
+	}
+
+		/* Cannot create - b/c cannot inherit from a singleton
+	public void testSingletonInheritance() {
+		SingletonInheritance instance = new SingletonInheritance();
+		instance.test();
+	}
+	*/
+
 }

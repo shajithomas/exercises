@@ -1,3 +1,5 @@
+import org.junit.Test;
+
 import java.io.IOException;
 import java.lang.*;
 import java.lang.Double;
@@ -9,26 +11,15 @@ import java.lang.System;
 import java.util.*;
 import java.util.ArrayList;
 
-public class test1 {
+public class JavaCollectionsTest {
 	public static void main ( String[] args) {
-		testSingleton();
-		new test1().testList();
-		new test1().mapTest();
+		new JavaCollectionsTest().testList();
+		new JavaCollectionsTest().mapTest();
         System.out.println("\n========================\n");
-        new test1().genericArray();
+        new JavaCollectionsTest().genericArray();
         System.out.println("\n========================\n");
-        new test1().genericArrayList();
+        new JavaCollectionsTest().genericArrayList();
 	}
-	public static void testSingleton() {
-		Singleton instance = Singleton.getInstance();
-		instance.test();
-	}
-	/* Cannot create - b/c cannot inherit from a singleton
-	public void testSingletonInheritance() {
-		SingletonInheritance instance = new SingletonInheritance();
-		instance.test();
-	}
-	*/
 	public void testList() {
 		List <String>v = new ArrayList<String>();
 		v.add("test");
@@ -46,22 +37,25 @@ public class test1 {
 		}
 		
 	}
+
+//	@Test
 	public void mapTest() {
 		Map<String, String> map = new HashMap<>();
 		map.put("key1", "some data1");
 		map.put("key2", "some data2");
 		
-		for ( String key : map.keySet() ) {
-			System.out.println("key: "+ key + "    value: "+ map.get(key));
-		}
-		
-		System.out.println("\nTesting the traversal thru iterator");
-		Iterator<String> itr = map.keySet().iterator();
-		while (itr.hasNext() ) {
-			String key = itr.next();
-			System.out.println("key: "+ key + "    value: "+ map.get(key));
-		}
-	}
+        for (String key : map.keySet()) {
+            System.out.println("key: " + key + "    value: " + map.get(key));
+        }
+
+        System.out.println("\nTesting the traversal thru iterator");
+        Iterator<String> itr = map.keySet().iterator();
+        while (itr.hasNext() ) {
+            String key = itr.next();
+            System.out.println("key: "+ key + "    value: "+ map.get(key));
+        }
+
+    }
 
     /*
         Create a generic array of objects
