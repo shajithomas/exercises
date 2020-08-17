@@ -5,9 +5,6 @@ public class Fibonacci {
         if (n == 1) {
             return 0;
         }
-        if (n == 2) {
-            return 1;
-        }
         int fib1 = 0;
         int fib2 = 1;
         for (int i=3; i<=n; i++) {
@@ -32,7 +29,7 @@ public class Fibonacci {
      * classic dynamic with memoization using a cache array
      */
     int fiboDynamic(int n) {
-        int[] cache = new int[n];
+        int[] cache = new int[n+1];
         cache[0] = 0;
         cache[1] = 1;
         return calcFibo(n,cache);

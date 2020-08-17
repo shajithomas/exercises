@@ -23,4 +23,16 @@ public class FibonacciTest {
         Assert.assertEquals(expected, fib.fiboDynamic(10));
     }
 
+    @Test
+    public void find1stFibo() {
+        Fibonacci fib = new Fibonacci();
+        int result = fib.findNthFibo(1);
+        System.out.println(result);
+        int expected = 0;
+        Assert.assertEquals(expected, result);
+        Assert.assertEquals(expected, fib.fiboRecursive(1));
+        Assert.assertEquals(expected, fib.fiboDynamic(1));
+
+    }
+
 }
