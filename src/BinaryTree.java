@@ -1,3 +1,4 @@
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.awt.image.AreaAveragingScaleFilter;
@@ -204,6 +205,37 @@ public class BinaryTree {
 
     }
 
+    public boolean compareTrees(Node rootA, Node rootB) {
+        if (rootA == null && rootB == null) {
+            return true;
+        }
+        if (rootA.val == rootB.val) {
+            return compareTrees(rootA.left, rootB.left) && compareTrees(rootA.right, rootB.right);
+        }
+        return false;
+    }
+
+    @Test
+    public void testCompareTreesNull() {
+        Assert.assertEquals(true, compareTrees(null, null));
+    }
+
+    @Test
+    public void testCompareTreesAreEqual() {
+        long[] data = {6,4,5,2,3,4,6};
+        Node treeA = createTree(data);
+        Node treeB = createTree(data);
+        Assert.assertEquals(true, compareTrees(treeA, treeB));
+    }
+
+    @Test
+    public void testCompareTreesAreNotEqual() {
+        long[] dataA = {6,4,5,2,3,4,6};
+        long[] dataB = {6,4,5,2,3,5,6};
+        Node treeA = createTree(dataA);
+        Node treeB = createTree(dataB);
+        Assert.assertEquals(false, compareTrees(treeA, treeB));
+    }
 
     class Node {
         long val;
