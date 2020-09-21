@@ -1,14 +1,17 @@
 import java.util.Arrays;
 
 class Qsort {
-	int [] values = { 3,8,5,2,9,12,7};
+//	int [] values = { 3,8,5,2,9,12,7};
+	int [] values = { 1, 3, 5, 2, 4, 6, 7};
 
+	int swapCount = 0;
 	public static void main(String [] args) {
 		Qsort q = new Qsort();
 		System.out.println( Arrays.toString(q.values)); 
 		//System.exit(0);
 		q.sort();
 		System.out.println( Arrays.toString(q.values));
+		System.out.println("Min swaps = " + q.swapCount);
 	}
 	
 	private void sort() {
@@ -53,6 +56,10 @@ class Qsort {
 		int temp = values[a];
 		values[a] = values[b];
 		values[b] = temp;
+
+		if ( a != b) {
+			swapCount++;
+		}
 	}
 }
 		

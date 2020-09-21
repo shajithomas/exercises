@@ -1,3 +1,5 @@
+import org.junit.Test;
+
 import java.io.*;
 import java.util.*;
 
@@ -10,6 +12,7 @@ import java.util.*;
 
 class ThreadTest {
   static volatile boolean quit = false;
+
   public static void main(String[] args) throws Exception{
     Thread t = new Thread (() -> {
       int i = 0;

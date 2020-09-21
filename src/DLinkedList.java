@@ -1,6 +1,24 @@
 public class DLinkedList {
 	public static void main ( String [] args) {
 		DLinkedList list = new DLinkedList();
+		insertData(list);
+		System.out.println ("The linked list is as follows");
+		list.print();
+		System.out.println("\n---------------------------------------");
+
+		DLinkedList list2 = new DLinkedList();
+		insertData2(list2);
+		list2.print();
+
+		
+		//To check how an explicit insertAfter works. Sort order is not maintained
+		//list.insertAfter(5, 7);
+		//list.insertAfter(12, 44);
+		//System.out.println ("The  new linked list is as follows");
+		//list.print();
+	}
+
+	private static void insertData(DLinkedList list) {
 		list.insert(10);
 		list.insert(15);
 		list.insert(5);
@@ -9,15 +27,20 @@ public class DLinkedList {
 		list.insert(3);
 		list.insert(12);
 		list.insert(15);
-		System.out.println ("The linked list is as follows");
-		list.print();
-		
-		//To check how an explicit insertAfter works. Sort order is not maintained
-		//list.insertAfter(5, 7);
-		//list.insertAfter(12, 44);
-		//System.out.println ("The  new linked list is as follows");
-		//list.print();
 	}
+	private static void insertData2(DLinkedList list) {
+		list.insert2(10);
+		list.insert2(15);
+		list.insert2(5);
+		list.insert2(22);
+		list.insert2(3);
+		list.insert2(3);
+		list.insert2(12);
+		list.insert2(15);
+	}
+
+
+
 	Link head = null;
 	class Link {
 		Link next;
@@ -29,12 +52,12 @@ public class DLinkedList {
 			this.prev = prev;
 		}
 		public void print(){
-			System.out.println("---------------");
-			System.out.println("Data = " + data);
-			System.out.println("Next = " + (next != null ? next.data : "null"));
-			System.out.println("Prev = " + (prev != null ? prev.data : "null"));
+			Integer left = prev != null ? prev.data : null;
+			Integer right = next != null ? next.data : null;
+			System.out.println( left + " <-- " + data + " --> " + right);
 		}
 	}
+	//insert into a sorted linked List
 	public void insert(int data) {
 		if ( head == null ) {
 			head = new Link(data, head,null);
@@ -60,6 +83,26 @@ public class DLinkedList {
 			}
 		}
 	}
+
+	public void insert2(int data) {
+		if ( head == null) {
+			head = new Link(data, null, null);
+		} else if (data <= head.data) {
+			Link link = new Link(data, head, null);
+			head.prev = link;
+			head = link;
+		} else {
+			Link curLink = head;
+			while (curLink.next != null && curLink.next.data < data ) {
+				curLink = curLink.next;
+			}
+			Link temp = curLink.next;
+			curLink.next = new Link(data, temp, curLink);
+			if ( temp != null) {
+				temp.prev = curLink.next;
+			}
+		}
+	}
 	
 	/*
 	public void insertAfter(int data1, int data) {
@@ -78,7 +121,8 @@ public class DLinkedList {
 	public void print() {
 		Link curNode = head;
 		while ( curNode != null ) {
-			curNode.print();
+			System.out.print(curNode.data + " --> ");
+//			curNode.print();
 			curNode = curNode.next;
 		}
 	}	

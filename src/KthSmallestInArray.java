@@ -1,5 +1,8 @@
 
 // Java code for kth smallest element in an array
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -64,13 +67,49 @@ public class KthSmallestInArray {
     return Integer.MAX_VALUE;
   }
 
+  public int kthSmallestBubbleSort(int[] a, int k) {
+    for (int i=0; i<k; i++) {
+      for (int j=i+1; j<a.length; j++) {
+        if (a[i] > a[j]) {
+          int temp = a[i];
+          a[i] = a[j];
+          a[j] = temp;
+        }
+      }
+    }
+    return a[k-1];
+  }
+
   // Driver program to test above methods
   public static void main(String[] args)
   {
     Integer arr[] = new Integer[]{12,7,8, 6,3, 4, 19,26};
     int k = 3;
-    System.out.print( "K'th smallest element is " +
-          kthSmallest(arr, 0, arr.length - 1, k) );
+    int result = kthSmallest(arr, 0, arr.length - 1, k);
+    System.out.print( k + " smallest element is " + result);
+    Assert.assertEquals(6, result);
+  }
+
+  public static class UnitTest{
+    @Test
+    public void kthSmallest() {
+      int arr[] = {12,7,8, 6,3, 4, 19,26};
+      int k = 3;
+      KthSmallestInArray test = new KthSmallestInArray();
+      int result = test.kthSmallestBubbleSort(arr, k) ;
+      System.out.print( k+ " smallest element is " + result );
+      Assert.assertEquals(6, result);
+    }
+
+    @Test
+    public void kthSmallestQuickSort() {
+        Integer arr[] = new Integer[]{12,7,8, 6,3, 4, 19,26};
+        int k = 3;
+        KthSmallestInArray test = new KthSmallestInArray();
+        int result = test.kthSmallest(arr, 0, arr.length - 1, k);
+        System.out.print( k + " smallest element is " + result);
+        Assert.assertEquals(6, result);
+      }
   }
 }
 

@@ -4,6 +4,8 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.util.Collections.*;
+
 public class ArrayTest {
 	private Integer []array;
 	public static void main ( String [] args ) {
@@ -22,8 +24,8 @@ public class ArrayTest {
 		for ( int i = 0; i < len/2; i++ ) {
 			System.out.println( "i : " +i);
 			int temp = array[i];
-			array[i] = array[len-i-1];
-			array[len-i-1] = temp;
+			array[i] = array[len-1-i];
+			array[len-1-i] = temp;
 		}
 		System.out.println( Arrays.toString(array));
 		return array;
@@ -82,11 +84,11 @@ public class ArrayTest {
 	*/
 	public int detectUnpaired(int[] A) {
 		HashMap<Integer, Integer> map = new HashMap<>();
-		for ( int i=0; i < A.length; i++) {
-			if ( map.containsKey(A[i])) {
-				map.remove(A[i]);
+		for (int element : A) {
+			if (map.containsKey(element)) {
+				map.remove(element);
 			} else {
-				map.put(A[i],1);
+				map.put(element, 1);
 			}
 		}
 		int result =  (Integer)map.keySet().toArray()[0];
@@ -113,12 +115,13 @@ public class ArrayTest {
 	 */
 	public int[] topKFrequent(int[] nums, int k) {
 		HashMap<Integer, Integer> map = new HashMap<>();
-		for (int i=0; i< nums.length; i++) {
-			Integer value = map.get(nums[i]);
+		for (int num : nums) {
+			//map.merge(num, 1, Integer::sum); -- the entire code below can be replaced with this one line
+			Integer value = map.get(num);
 			if (value == null) {
-				map.put(nums[i], 1);
+				map.put(num, 1);
 			} else {
-				map.put(nums[i], value+1);
+				map.put(num, value + 1);
 			}
 		}
 
@@ -137,6 +140,30 @@ public class ArrayTest {
 				.sorted((e1,e2) -> e2.getValue() - e1.getValue())
 				.collect(Collectors.toList());
 	}
+
+	//sorts using Collections.sort
+	public int[] topKFrequent2(int[] nums, int k) {
+//		TreeMap<Integer, Integer> map = new TreeMap<>((e1,e2) -> e2.intValue() - e1.intValue());
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int num : nums) {
+			Integer value = map.get(num);
+			if (value == null) {
+				map.put(num, 1);
+			} else {
+				map.put(num, value + 1);
+			}
+		}
+
+		List<Map.Entry<Integer, Integer>> list = new ArrayList<>(map.entrySet());
+		list.sort((e1, e2) -> e2.getValue() - e1.getValue());
+		int[] result = new int[k];
+		for (int i = 0; i<k; i++) {
+			result[i] = list.get(i).getKey();
+		}
+		return result;
+	}
+
+
 
 /*
 An array A consisting of N different integers is given. The array contains integers in the range [1..(N + 1)], which means that exactly one element is missing.
@@ -181,6 +208,37 @@ each element of array A is an integer within the range [1..(N + 1)].
 		}
 
 		return A[A.length-1] +1;
+	}
+
+/*
+	Write a function:
+
+	class Solution { public int solution(int[] A); }
+
+	that, given an array A of N integers, returns the smallest positive integer (greater than 0) that does not occur in A.
+
+	For example, given A = [1, 3, 6, 4, 1, 2], the function should return 5.
+
+	Given A = [1, 2, 3], the function should return 4.
+
+	Given A = [−1, −3], the function should return 1.
+
+	Write an efficient algorithm for the following assumptions:
+
+	N is an integer within the range [1..100,000];
+	each element of array A is an integer within the range [−1,000,000..1,000,000
+*/
+	public int findMissingInt(int[] A) {
+		Arrays.sort(A);
+		if (A[A.length - 1] <= 0) {
+			return 1;
+		}
+
+		for (int i = 1; i <= A.length; i++) {
+			if (Arrays.binarySearch(A, i) < 0)
+				return i;
+		}
+		return A[A.length - 1] + 1;
 	}
 
 /*
@@ -243,26 +301,29 @@ each element of array A is an integer within the range [1..N + 1].
 
 	public int[] maxCounters(int N, int[] A) {
 		int[] result = new int[N];
-		for (int i=0;i< A.length; i++) {
-			if (A[i] == N+1 ) {
-				maxAllCounter(A, result);
+		for (int num : A) {
+			if (num == N + 1) {
+				maxAllCounter(result);
 			} else {
-				result[A[i]-1]++;
+				result[num - 1]++;
 			}
 		}
 		return result;
 	}
 
-	private void maxAllCounter(int[] A, int[] result) {
+	private void maxAllCounter(int[] result) {
 		int max = result[0];
-		for ( int i=0; i< result.length; i++) {
-			if ( max < result[i]) {
-				max = result[i];
+		for (int counter : result) {
+			if (max < counter) {
+				max = counter;
 			}
 		}
-		for (int i=0; i< result.length; i++) {
-			result[i] = max;
-		}
+		Arrays.fill(result, max);
+		/* replacing with the above line
+			for (int i=0; i< result.length; i++) {
+				result[i] = max;
+			}
+		*/
 	}
 
 /*
@@ -315,7 +376,7 @@ each element of array A is an integer within the range [1..1,000,000,000].
 		if (A.length < 2) {
 			return 1;
 		}
-		Set set = new HashSet();
+		Set<Integer> set = new HashSet<>();
 		for (int element : A) {
 			set.add(element);
 		}

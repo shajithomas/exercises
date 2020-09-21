@@ -20,6 +20,7 @@ public class JavaCollectionsTest {
         System.out.println("\n========================\n");
         new JavaCollectionsTest().genericArrayList();
 	}
+	@Test
 	public void testList() {
 		List <String>v = new ArrayList<String>();
 		v.add("test");
@@ -38,7 +39,7 @@ public class JavaCollectionsTest {
 		
 	}
 
-//	@Test
+	@Test
 	public void mapTest() {
 		Map<String, String> map = new HashMap<>();
 		map.put("key1", "some data1");
@@ -60,6 +61,7 @@ public class JavaCollectionsTest {
     /*
         Create a generic array of objects
      */
+    @Test
     public void genericArray() {
         Object []objArray = new Object[5];
         objArray[0] = new String("String Object");
@@ -82,6 +84,7 @@ public class JavaCollectionsTest {
         Create a generic arraylist of objects
         check if we can assign a subclass object to superclass list
      */
+    @Test
     public void genericArrayList() {
         ArrayList<Object> objList = new ArrayList<Object>();
         objList.add(new String("String Object"));

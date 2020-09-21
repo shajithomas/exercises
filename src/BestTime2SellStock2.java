@@ -56,6 +56,7 @@ public class BestTime2SellStock2 {
         int[] prices = {5, 3, 7, 6, 6, 8, 9};
         int profit = test.maxProfit(prices);
         System.out.println(profit);
+        System.out.println(test.maxProfit(prices, 2));
     }
 
     @Test

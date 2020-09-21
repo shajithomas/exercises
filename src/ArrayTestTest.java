@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.util.Arrays;
 
 public class ArrayTestTest {
@@ -64,6 +65,24 @@ public class ArrayTestTest {
 	}
 
 	@Test
+	public void topKFrequent2(){
+		int[] array = {1,1,1,2,2,3,3,3,3};
+		int[] result = test.topKFrequent2(array, 2);
+		int[] expected = {3,1};
+		System.out.println(Arrays.toString(result));
+		Assert.assertArrayEquals(expected, result);
+	}
+
+	@Test
+	public void topKFrequent2_2(){
+		int[] array = {1,1,2,2,3,3,3,2,2,2};
+		int[] result = test.topKFrequent2(array, 2);
+		int[] expected = {2,3};
+		System.out.println(Arrays.toString(result));
+		Assert.assertArrayEquals(expected, result);
+	}
+
+	@Test
 	public void findMissingEmpty() {
 		int[] array = {};
 		int result = test.findMissing(array);
@@ -107,4 +126,21 @@ public class ArrayTestTest {
 	}
 
 
+    @Test
+    public void findMissingInt() {
+    	int[] array = {1, 3, 6, 4, 1, 2};
+    	ArrayTest test = new ArrayTest();
+    	int result = test.findMissingInt(array);
+    	Assert.assertEquals(5, result);
+	}
+
+	@Test
+	public void maxCounters() {
+		int N = 5;
+		int[] A = {3,4,4,6,1,4,4};
+		int[] expected = {3, 2, 2, 4, 2};
+		ArrayTest test = new ArrayTest();
+		int[] result = test.maxCounters(N, A);
+		Assert.assertArrayEquals(expected, result);
+	}
 }
