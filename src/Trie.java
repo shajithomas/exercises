@@ -86,10 +86,7 @@ public class Trie {
            parent = child;
            i++;
        }
-       if (parent.isWord) {
-           return true;
-       }
-       return false;
+       return parent.isWord;
    }
 
    public void insert(String str) {

@@ -78,17 +78,11 @@ public class MatchingBrackets {
     }
 
     boolean isLeftBrace(Character c) {
-        if (c == '(' || c == '{' || c == '[') {
-            return true;
-        }
-        return false;
+        return c == '(' || c == '{' || c == '[';
     }
 
     boolean isRightBrace(Character c) {
-        if (c == ')' || c == '}' || c == ']') {
-            return true;
-        }
-        return false;
+        return c == ')' || c == '}' || c == ']';
     }
 
     boolean match(char l, char r) {

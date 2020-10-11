@@ -39,11 +39,7 @@ public class SquareRoot {
 	
 	public static boolean approxEquals( double num1, double num2) {
 		int precision = 1000;
-		if ( Math.round(num1*precision) == Math.round(num2*precision)) {
-			return true;
-		} else {
-			return false;
-		}
+        return Math.round(num1 * precision) == Math.round(num2 * precision);
 	}
 
 }

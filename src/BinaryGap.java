@@ -19,6 +19,9 @@ Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized cop
 
  */
 
+import org.junit.Assert;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -40,6 +43,8 @@ class BinaryGap {
     }
     public int findBinaryGap(int N) {
         int[] result = new int[32];
+
+        // convert number to binary number
         int R;
         int i = 0;
         while ( N >= 1) {
@@ -55,28 +60,43 @@ class BinaryGap {
         for (int k=i; k >= 0; k--) {
             System.out.print(result[k] + " ");
         }
+        System.out.println();
+
         boolean start_gap = false;
-        int gap_count = 0;
         int gapNo = 0;
         int startIndex = 0;
         while ( i >= 0) {
             if (result[i] == 1) {
-                if ( start_gap == false) {
+                if (!start_gap) {
                     start_gap = true;
-                    startIndex = i;
                 } else {
                     gaps[gapNo] = startIndex - i-1;
                     gapNo++;
-                    startIndex = i;
                 }
-                i--;
-            } else {
-                i--;
+                startIndex = i;
             }
+            i--;
         }
         int maxGap = Arrays.stream(gaps).max().getAsInt();
         return maxGap;
     }
+
+    public static class UnitTest{
+        @Test
+        public void testGap() {
+            BinaryGap bg = new BinaryGap();
+            int gap = bg.findBinaryGap(17);
+            // 17 = 10001
+            Assert.assertEquals(3, gap);
+            gap = bg.findBinaryGap(5);
+            // 5 = 101
+            Assert.assertEquals(1, gap);
+            Assert.assertEquals(0, bg.findBinaryGap(3)); //11
+            Assert.assertEquals(1, bg.findBinaryGap(45)); //1 0 1 1 0 1
+
+        }
+    }
+
 }
 
 

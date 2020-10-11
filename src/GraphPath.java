@@ -12,6 +12,10 @@
  *    V    V
  *    4 <- 3
  */
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -28,41 +32,32 @@ class GraphPath {
     }
 
     private void init() {
+        //create adjacency list for each vertex
         for (int i = 1; i<= numVeritces; i++) {
             LinkedList<Integer> edgeList = new LinkedList<>();
             graph.put(i, edgeList);
         }
-
     }
 
+    //add edge from vertex u to vertex v
     public void addEdge(int u, int v) {
         graph.get(u).add(v);
     }
 
     public String findPath(int u, int v) {
-        if (pathFound) {
-            return "Yes";
-        }
         LinkedList<Integer> vertices = graph.get(u);
         visited.put(u,true);
-        for (int i=0; i<vertices.size(); i++) {
-            Integer vertex = vertices.get(i);
-            if (visited.get(vertex) != null) {
-                continue;
-            }
-            if (pathFound) {
-                return "Yes";
-            }
+        for (Integer vertex : vertices) {
+          if (visited.get(vertex) == null)
             visited.put(vertex, true);
             if (vertex == v) {
-                pathFound = true;
                 return "Yes";
             }
-            findPath(vertex, v);
-
+            return findPath(vertex, v);
         }
         return "No";
     }
+
     public static void main(String[] args) {
         GraphPath graphPath = new GraphPath(4);
         graphPath.init();
@@ -72,6 +67,41 @@ class GraphPath {
         graphPath.addEdge(3,4);
         String result = graphPath.findPath(1,3);
         System.out.println(result);
+    }
+
+    public static class UnitTest{
+        GraphPath graph;
+
+        @Before
+        public void setup() {
+            graph = new GraphPath(4);
+            graph.init();
+            graph.addEdge(1,2);
+            graph.addEdge(1,4);
+            graph.addEdge(2,3);
+            graph.addEdge(3,4);
+        }
+
+        @Test
+        public void testFindPath() {
+            String result = graph.findPath(1,3);
+            System.out.println(result);
+            Assert.assertEquals("Yes", result);
+        }
+
+        @Test
+        public void testFindPath_2() {
+            String result = graph.findPath(2,4);
+            System.out.println(result);
+            Assert.assertEquals("Yes", result);
+        }
+
+        @Test
+        public void testFindPath2Negative() {
+            String result = graph.findPath(4,2);
+            System.out.println(result);
+            Assert.assertEquals("No", result);
+        }
 
     }
 }

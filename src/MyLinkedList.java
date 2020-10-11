@@ -1,7 +1,11 @@
-public class MyLinkedList<N> {
-	public static void main ( String [] args) {
+import org.junit.Test;
+
 /*
-		MyLinkedList<N> list = new MyLinkedList<N>();
+ Sorted linked list implementation
+ */
+public class MyLinkedList {
+	public static void main ( String [] args) {
+		MyLinkedList list = new MyLinkedList();
 		list.insert(10);
 		list.insert(15);
 		list.insert(5);
@@ -15,7 +19,6 @@ public class MyLinkedList<N> {
 		Link revList = list.reverseList(list.head);
 		System.out.println("================================");
 		list.print(revList);
-*/
 
 
 		
@@ -53,6 +56,18 @@ public class MyLinkedList<N> {
 			}
 		}
 	}
+
+	public void insert2(int data) {
+		if ( head == null || data <= head.data) {
+			head = new Link(data,head);
+		} else {
+			Link curNode = head;
+			while (curNode.next != null && curNode.next.data < data) {
+				curNode = curNode.next;
+			}
+			curNode.next = new Link(data, curNode.next);
+		}
+	}
 	public Link reverseList(Link head) {
 		if (head == null || head.next == null) {
 			return head;
@@ -69,30 +84,6 @@ public class MyLinkedList<N> {
 		return curNode;
 	}
 	
-	public void insert1(int data) {
-		if ( head == null ) { 
-			head = new Link(data,null);
-		} else if ( data <= head.data) {
-			Link tempNode = new Link(data, head);
-			head = tempNode;
-		} else {
-			Link curNode = head;
-			Link prevNode = head;
-			while ( (curNode = curNode.next) != null ){
-				if ( data <= curNode.data) {
-					Link node = new Link(data, curNode);
-					prevNode.next = node;
-					break;
-				} else {
-					prevNode = curNode;
-				}
-				
-			}
-			if ( curNode == null ) {
-				prevNode.next = new Link( data,null);
-			}
-		}
-	}
 	public void insertAfter(int data1, int data) {
 		if ( head == null ) System.out.println("empty list");
 		Link curNode = head;
@@ -112,6 +103,50 @@ public class MyLinkedList<N> {
 			System.out.println(curNode.data);
 			curNode = curNode.next;
 		}
-	}	
+	}
+
+	public static class UnitTest {
+		@Test
+		public void testInsertAndReverse() {
+			MyLinkedList list = new MyLinkedList();
+			list.insert(10);
+			list.insert(15);
+			list.insert(5);
+			list.insert(22);
+			list.insert(3);
+			list.insert(3);
+			list.insert(12);
+			list.insert(15);
+			System.out.println ("The linked list is as follows");
+			list.print(list.head);
+
+			Link revList = list.reverseList(list.head);
+			System.out.println("================================");
+			list.print(revList);
+
+		}
+
+		@Test
+		public void testInsert2AndReverse() {
+			MyLinkedList list = new MyLinkedList();
+			list.insert2(10);
+			list.insert2(15);
+			list.insert2(5);
+			list.insert2(22);
+			list.insert2(3);
+			list.insert2(3);
+			list.insert2(12);
+			list.insert2(15);
+			System.out.println ("The linked list is as follows");
+			list.print(list.head);
+
+			Link revList = list.reverseList(list.head);
+			System.out.println("================================");
+			list.print(revList);
+
+		}
+
+
+	}
 }	
 

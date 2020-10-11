@@ -4,10 +4,7 @@
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.*;
-
 public class ArrayTest {
-	private Integer []array;
 	public static void main ( String [] args ) {
 		ArrayTest test = new ArrayTest();
 		Integer []a = new Integer[] {1,2,3,4,5,6,7,8};
@@ -15,11 +12,10 @@ public class ArrayTest {
 	}
 
 //* How to reverse an array efficiently
- public Integer[] reverseArray(Integer []array){
+ public Integer[] reverseArray(Integer[] array){
 		if ( array == null) {
 			throw new RuntimeException("You passed in a null array");
 		}
-		this.array = array;
 		int len = array.length;
 		for ( int i = 0; i < len/2; i++ ) {
 			System.out.println( "i : " +i);
@@ -31,6 +27,23 @@ public class ArrayTest {
 		return array;
 	}
 
+	public int[] reverseArray2(int[] a) {
+		int start = 0;
+		int end = a.length-1;
+		while ( start < end ) {
+			int temp = a[start];
+			a[start] = a[end];
+			a[end] = temp;
+			start++;
+			end--;
+		}
+		return a;
+	}
+
+	/*
+	 a =  1 2 3 4 5
+	 k  = 2
+	 */
 	public int[] rotate(int[] A, int K) {
 		int len = A.length;
 		int[] result = new int[len];
@@ -49,6 +62,29 @@ public class ArrayTest {
 			j++;
 		}
 		return result;
+	}
+	/*
+	 a = 1 2 3 4 5 6 7
+	 k = 2
+	 len = 7
+	 */
+	public int[] rotateArrayInPlace(int[] a, int k) {
+		int len = a.length;
+		k = k % len;
+		reverseArray(a, 0, len-k-1);
+		reverseArray(a, len-k, len-1);
+		reverseArray(a, 0, len-1);
+		return a;
+	}
+
+	private void reverseArray(int[] a , int start, int end) {
+		while ( start < end) {
+			int temp = a[start];
+			a[start] = a[end];
+			a[end] = temp;
+			start++;
+			end--;
+		}
 	}
 
 	/*
@@ -116,7 +152,8 @@ public class ArrayTest {
 	public int[] topKFrequent(int[] nums, int k) {
 		HashMap<Integer, Integer> map = new HashMap<>();
 		for (int num : nums) {
-			//map.merge(num, 1, Integer::sum); -- the entire code below can be replaced with this one line
+//			map.merge(num, 1, (a1, a2) -> a1 + a2 ); // -- the entire code below can be replaced with this one line
+//			map.merge(num, 1, Integer::sum);
 			Integer value = map.get(num);
 			if (value == null) {
 				map.put(num, 1);
@@ -163,6 +200,34 @@ public class ArrayTest {
 		return result;
 	}
 
+	//using priority Queue
+	public int[] topKFrequent3(int[] nums, int k) {
+		Map<Integer, Integer> map = new HashMap<>();
+		for (int num : nums) {
+			Integer value = map.get(num);
+			if (value == null) {
+				map.put(num, 1);
+			} else {
+				map.put(num, value + 1);
+			}
+		}
+
+		// put them into a priority Queue and trim them when reaching the K size
+		PriorityQueue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>(
+				Comparator.comparingInt(Map.Entry::getValue));
+		for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+			queue.offer(entry);
+			if (queue.size() > k) {
+				queue.poll();
+			}
+		}
+		int[] result = new int[k];
+		int i = k-1;
+		for (Map.Entry<Integer, Integer> entry : queue) {
+			result[i--] = entry.getKey();
+		}
+		return result;
+	}
 
 
 /*
@@ -393,4 +458,76 @@ each element of array A is an integer within the range [1..1,000,000,000].
 			return 0;
 		}
 	}
+
+	/*
+    Guidewire interview Question.
+
+    Given an string containing letters of the alphabet ( uppercase & lowercase ),
+    find the largest alphabet that exists in the string which has both the uppercse and corresponding lowercase
+    character.
+    Example:
+    String s = "aaBabcDaA";
+    largest alphabet that has both upper and lowercase is B
+
+    it should return "NO" if there are no such character,
+    otherwise return the uppercase Character.
+
+     */
+	public String findLargestChar(String s) {
+		char[] ss = s.toCharArray();
+		Set<Character> charSet = new HashSet<>();
+		Arrays.sort(ss);
+		for (int i = 0; (i < ss.length && Character.isUpperCase(ss[i])); i++) {
+			char toFind = Character.toLowerCase(ss[i]);
+			if (Arrays.binarySearch(ss, toFind) >= 0) {
+				charSet.add(ss[i]);
+			}
+		}
+		if (charSet.size() == 0) {
+			return "NO";
+		}
+		List<Character> charList = new ArrayList<>(charSet);
+//        Collections.sort(charList);
+		charList.sort(null);
+		Character c = charList.get(charList.size() - 1);
+		return String.valueOf(c);
+	}
+
+	/*
+        from: Equinix
+        Problem:
+            Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+            Input: int[] nums, int target
+            Output: int[]
+
+            Example:
+            Given nums = [1, 6, 11, 14], target = 12,
+            Because nums[0] + nums[2] = 1 + 11 = 12,
+            return [0, 2]
+
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     */
+	public static int[] findTargetNumbers(int[] nums, int target) {
+
+		int[] result = new int[2];
+		Map<Integer,Integer> map = new LinkedHashMap<>();
+		int n = nums.length;
+
+		for (int i = 0; i < n; i++) {
+			map.put(nums[i], i);
+		}
+
+		for (int i = 0; i < n - 1; i++) {
+			int toCheck = target - nums[i];
+			Integer toCheckIndex = map.get(toCheck);
+			if(toCheckIndex != null ) {
+				result[0] = i;
+				result[1] = toCheckIndex;
+				return result;
+			}
+		}
+		return null;
+	}
+
 }
