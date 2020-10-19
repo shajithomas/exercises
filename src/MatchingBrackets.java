@@ -26,6 +26,7 @@ string S consists only of the following characters: "(", "{", "[", "]", "}" and/
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class MatchingBrackets {
@@ -112,4 +113,5 @@ public class MatchingBrackets {
             return data[--pos];
         }
     }
+
 }

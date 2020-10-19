@@ -58,6 +58,7 @@ class GraphPath {
         return "No";
     }
 
+/*
     public static void main(String[] args) {
         GraphPath graphPath = new GraphPath(4);
         graphPath.init();
@@ -68,6 +69,7 @@ class GraphPath {
         String result = graphPath.findPath(1,3);
         System.out.println(result);
     }
+*/
 
     public static class UnitTest{
         GraphPath graph;
@@ -97,6 +99,13 @@ class GraphPath {
         }
 
         @Test
+        public void testFindPath_3() {
+            String result = graph.findPath(1,4);
+            System.out.println(result);
+            Assert.assertEquals("Yes", result);
+        }
+
+        @Test
         public void testFindPath2Negative() {
             String result = graph.findPath(4,2);
             System.out.println(result);
@@ -105,3 +114,5 @@ class GraphPath {
 
     }
 }
+//todo: implement the vertex as an object
+
