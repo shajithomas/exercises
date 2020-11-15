@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ArrayTestTest {
 	private ArrayTest test;
@@ -259,6 +260,20 @@ public class ArrayTestTest {
 		Assert.assertArrayEquals(expected, result);
 	}
 
+	@Test
+	public void maxNumOfStringsFit_Length_small() {
+		List<String> strings = Arrays.asList("Henry", "Henry11", "Henry1", "David");
+		int arrayLen = 20;
+		int result = ArrayTest.maxNumOfStringsFit(strings, arrayLen);
+		Assert.assertEquals(3, result);
+	}
 
+	@Test
+	public void maxNumOfStringsFit_LargeLen() {
+		List<String> strings = Arrays.asList("Henry", "Henry11", "Henry1", "David");
+		int arrayLen = 100;
+		int result = ArrayTest.maxNumOfStringsFit(strings, arrayLen);
+		Assert.assertEquals(4, result);
+	}
 
 }

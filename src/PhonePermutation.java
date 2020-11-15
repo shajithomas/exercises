@@ -13,6 +13,7 @@ import java.lang.InheritableThreadLocal;
 import java.lang.Integer;
 import java.lang.String;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class PhonePermutation {
     int PHONE_NUMBER_LENGTH = 7;
@@ -62,8 +63,10 @@ public class PhonePermutation {
 
 
     public static void main(String []args) {
-        char []tempArray = args[0].toCharArray();
-        int []phoneNum = convert2IntArray(tempArray);
+        System.out.println("Enter the number: ");
+        Scanner scanner = new Scanner(System.in);
+        char[] tempArray = scanner.next().toCharArray();
+        int[] phoneNum = convert2IntArray(tempArray);
         PhonePermutation converter = new PhonePermutation();
         converter.printTelephoneWords(phoneNum);
     }

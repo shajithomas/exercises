@@ -22,11 +22,10 @@ public class JavaCollectionsTest {
 	}
 	@Test
 	public void testList() {
-		List <String>v = new ArrayList<String>();
+		List <String>v = new ArrayList<>();
 		v.add("test");
-		v.add(new String("4"));
+		v.add("4");
 		String i = v.get(0);
-		String ii = v.get(1);
 		System.out.println ("the string is: " + i );
 		
 		//test Iterator for list
@@ -36,6 +35,11 @@ public class JavaCollectionsTest {
 			String s = itr.next();
 			System.out.println(s);
 		}
+        System.out.println("-------------------------------------------");
+		itr = v.listIterator();
+		itr.next();
+		itr.remove();
+        System.out.println(itr.next());
 		
 	}
 
@@ -64,9 +68,9 @@ public class JavaCollectionsTest {
     @Test
     public void genericArray() {
         Object []objArray = new Object[5];
-        objArray[0] = new String("String Object");
-        objArray[1] = new Integer(10);
-        objArray[2] = new Double(1.0);
+        objArray[0] = "String Object";
+        objArray[1] = 10;
+        objArray[2] = 1.0;
 
         //print them out
         System.out.println(objArray[0]);

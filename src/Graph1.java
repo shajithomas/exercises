@@ -25,8 +25,9 @@ class Graph1 {
     public void printGraph() {
         for (int i = 0; i < graphArray.size(); i++) {
             LinkedList<Integer> vertex = graphArray.get(i);
-            System.out.print("\nvertex " + i);
-            vertex.forEach(v -> System.out.print(" -> " + v));
+            int curVertex = i;
+            vertex.forEach(v -> System.out.print(curVertex + " -> " + v + ", "));
+            System.out.println();
         }
     }
 

@@ -35,4 +35,32 @@ public class FibonacciTest {
 
     }
 
+    @Test
+    public void testFib1() {
+        Fibonacci fib = new Fibonacci();
+        Assert.assertEquals(1, fib.findNthFibo(3));
+        Assert.assertEquals(2, fib.findNthFibo(4));
+        Assert.assertEquals(3, fib.findNthFibo(5));
+        Assert.assertEquals(5, fib.findNthFibo(6));
+    }
+
+    @Test
+    public void testFibRecursive() {
+        Fibonacci fib = new Fibonacci();
+        Assert.assertEquals(1, fib.fiboRecursive(3));
+        Assert.assertEquals(2, fib.fiboRecursive(4));
+        Assert.assertEquals(3, fib.fiboRecursive(5));
+        Assert.assertEquals(5, fib.fiboRecursive(6));
+    }
+
+    @Test
+    public void testFibDynamic() {
+        Fibonacci fib = new Fibonacci();
+        Assert.assertEquals(1, fib.fiboDynamic(3));
+        Assert.assertEquals(2, fib.fiboDynamic(4));
+        Assert.assertEquals(3, fib.fiboDynamic(5));
+        Assert.assertEquals(5, fib.fiboDynamic(6));
+    }
+
+
 }

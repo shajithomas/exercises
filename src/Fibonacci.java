@@ -1,3 +1,4 @@
+
 public class Fibonacci {
 
     /* Find the nth Fibonacci number */
@@ -29,7 +30,7 @@ public class Fibonacci {
      * classic dynamic with memoization using a cache array
      */
     int fiboDynamic(int n) {
-        int[] cache = new int[n+1];
+        int[] cache = new int[n+1]; // +1 b/c fib 1 will only have space for 1 if n
         cache[0] = 0;
         cache[1] = 1;
         return calcFibo(n,cache);
@@ -44,3 +45,4 @@ public class Fibonacci {
 
     }
 }
+//    for Unit tests see the class FibonacciTest

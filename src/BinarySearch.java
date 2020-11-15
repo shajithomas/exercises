@@ -14,8 +14,8 @@ public class BinarySearch {
 		System.out.println("The result is: " + result);
 
 		BinarySearch bin = new BinarySearch();
-		Arrays.stream(bin.buf).forEach(System.out::println);
-		System.out.println("searched index is: " +  bin.nonRecursiveSearch(7));
+		Arrays.stream(a).forEach(System.out::println);
+		System.out.println("searched index is: " +  bin.nonRecursiveSearch(a,7));
 	}
 
 	public static int search(int[] buf, int n) {
@@ -37,7 +37,7 @@ public class BinarySearch {
 		}
 	}
 
-	public int nonRecursiveSearch(int n) {
+	public int nonRecursiveSearch(int[] buf, int n) {
 		int low = 0;
 		int high = buf.length-1;
 

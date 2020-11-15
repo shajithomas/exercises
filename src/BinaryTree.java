@@ -2,10 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.awt.image.AreaAveragingScaleFilter;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BinaryTree {
 
@@ -120,11 +117,18 @@ public class BinaryTree {
         long[] treeData = {6,2,8,1,4,7,10,-1,-1,3,5,-1,-1,9};
         Node tree = createTree(treeData);
         System.out.println(tree);
+        List<List<Long>> expected = Arrays.asList(Arrays.asList(6L),
+                Arrays.asList(2L, 8L),
+                Arrays.asList(1L, 4L, 7L, 10L),
+                Arrays.asList(3L, 5L, 9L));
         List result = levelOrder(tree);
+        System.out.println();
         System.out.println(result);
+        Assert.assertEquals(expected, result);
 
         result = levelOrder2(tree);
         System.out.println(result);
+        Assert.assertEquals(expected, result);
     }
 
 
@@ -179,22 +183,22 @@ public class BinaryTree {
      */
     public List<List<Long>> levelOrder2(Node root) {
         List<List<Long>> out = new ArrayList<>();
-        Queue<Node> q1 = new LinkedList<>();
+        Queue<Node> q = new LinkedList<>();
         List<Long> list = new ArrayList<>();
 
         if (root!= null) {
-            q1.add(root);
+            q.add(root);
         }
-        while (!q1.isEmpty()) {
-            int levelSize = q1.size();
+        while (!q.isEmpty()) {
+            int levelSize = q.size();
             while (levelSize > 0) {
-                root = q1.poll();
+                root = q.poll();
                 list.add(root.val);
                 if (root.left != null) {
-                    q1.offer(root.left);
+                    q.offer(root.left);
                 }
                 if (root.right != null) {
-                    q1.offer(root.right);
+                    q.offer(root.right);
                 }
                 levelSize--;
             }
@@ -203,6 +207,46 @@ public class BinaryTree {
         }
         return out;
 
+    }
+
+
+    @Test
+    public void testPrintLevelOrder() {
+        // this is array representation of a sorted tree 1-10
+        long[] treeData = {6,2,8,1,4,7,10,-1,-1,3,5,-1,-1,9};
+        Node tree = createTree(treeData);
+//        System.out.println(tree);
+        List<List<Long>> expected = Arrays.asList(Arrays.asList(6L),
+                Arrays.asList(2L, 8L),
+                Arrays.asList(1L, 4L, 7L, 10L),
+                Arrays.asList(3L, 5L, 9L));
+        System.out.println("Expected result = " + expected);
+        System.out.println();
+        printLevelOrder(tree);
+    }
+
+    public void printLevelOrder(Node root) {
+        if (root == null) {
+            System.out.println("Null");
+            return;
+        }
+        Queue<Node> q = new LinkedList<>();
+        q.offer(root);
+        while (!q.isEmpty()) {
+            int levelSize = q.size();
+            while (levelSize > 0) {
+                Node node = q.poll();
+                System.out.print(node.val + "  ");
+                if (node.left != null) {
+                    q.offer(node.left);
+                }
+                if (node.right != null) {
+                    q.offer(node.right);
+                }
+                levelSize--;
+            }
+            System.out.println();
+        }
     }
 
     public boolean compareTrees(Node rootA, Node rootB) {
@@ -217,7 +261,7 @@ public class BinaryTree {
 
     @Test
     public void testCompareTreesNull() {
-        Assert.assertEquals(true, compareTrees(null, null));
+        Assert.assertTrue(compareTrees(null, null));
     }
 
     @Test
@@ -225,7 +269,7 @@ public class BinaryTree {
         long[] data = {6,4,5,2,3,4,6};
         Node treeA = createTree(data);
         Node treeB = createTree(data);
-        Assert.assertEquals(true, compareTrees(treeA, treeB));
+        Assert.assertTrue(compareTrees(treeA, treeB));
     }
 
     @Test
@@ -234,7 +278,7 @@ public class BinaryTree {
         long[] dataB = {6,4,5,2,3,5,6};
         Node treeA = createTree(dataA);
         Node treeB = createTree(dataB);
-        Assert.assertEquals(false, compareTrees(treeA, treeB));
+        Assert.assertFalse(compareTrees(treeA, treeB));
     }
 
     class Node {

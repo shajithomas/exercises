@@ -1,7 +1,7 @@
 import java.lang.String;
 import java.lang.StringBuffer;
 import java.lang.System;
-import java.util.Arrays;
+import java.util.Scanner;
 
 public class Permutation {
     static char []in;
@@ -40,7 +40,9 @@ public class Permutation {
         }
      }
     public static void main ( String []args) {
-
-        permute(args[0]);
+        System.out.println("Enter the string to get permutations");
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.next();
+        permute(s);
     }
 }

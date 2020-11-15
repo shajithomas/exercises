@@ -22,14 +22,14 @@ public class BinarySearchTest {
 		BinarySearch bin = new BinarySearch();
 		bin.setBuf(buf);
 		Arrays.stream(bin.buf).forEach(System.out::println);
-		int result = bin.nonRecursiveSearch(7);
+		int result = bin.nonRecursiveSearch(buf,7);
 		System.out.println("searched index is: " +  result);
 		Assert.assertEquals(6, result);
 	}
 
 	@Test
 	public final void testNull() {
-		assertNotNull(new Integer(1));
+		assertNotNull(1);
 	}
 
 }

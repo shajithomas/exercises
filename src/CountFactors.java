@@ -43,6 +43,9 @@ public class CountFactors {
             CountFactors test = new CountFactors();
             int result = test.countFactors(16);
             Assert.assertEquals(5, result);
+            Assert.assertEquals(3, test.countFactors(25));
+            Assert.assertEquals(9, test.countFactors(36));
+
         }
     }
 }
